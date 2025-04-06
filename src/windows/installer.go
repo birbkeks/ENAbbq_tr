@@ -36,6 +36,9 @@ func inject(path string) {
 	src6 := filepath.Join(scriptDir, "resources", "font_modern.resS")
 	dst6 := filepath.Join(path, "ENA-4-DreamBBQ_Data", "font_modern.resS")
 
+	src7 := filepath.Join(scriptDir, "resources", "YarnSpinner.Unity.dll")
+	dst7 := filepath.Join(path, "ENA-4-DreamBBQ_Data", "Managed", "YarnSpinner.Unity.dll")
+
 	copyFile(src, dst)
 	copyFile(src1, dst1)
 	copyFile(src2, dst2)
@@ -43,6 +46,7 @@ func inject(path string) {
 	copyFile(src4, dst4)
 	copyFile(src5, dst5)
 	copyFile(src6, dst6)
+	copyFile(src7, dst7)
 }
 
 func copyFile(src, dst string) error {

@@ -1,6 +1,5 @@
 CGO_ENABLED=1
 CC=x86_64-w64-mingw32-cc
-LDFLAGS="-s -w -H=windowsgui"
 OUTPUT_WINDOWS=Installer-Windows.exe
 OUTPUT_LINUX=Installer-Linux
 THEME=dark
@@ -9,11 +8,11 @@ all: help
 
 windows:
 	@echo "Сборка проекта для Windows..."
-	@CGO_ENABLED=$(CGO_ENABLED) CC=$(CC) GOOS=windows GOARCH=amd64 go build -ldflags=$(LDFLAGS) -o $(OUTPUT_WINDOWS) ./windows/*.go
+	@CGO_ENABLED=$(CGO_ENABLED) CC=$(CC) GOOS=windows GOARCH=amd64 go build -ldflags="-s -w -H=windowsgui" -o $(OUTPUT_WINDOWS) ./windows/*.go
 
 linux:
 	@echo "Сборка проекта для Linux..."
-	@GOOS=linux GOARCH=amd64 go build -ldflags=$(LDFLAGS) -o $(OUTPUT_LINUX) ./linux/*.go
+	@GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o $(OUTPUT_LINUX) ./linux/*.go
 
 clean:
 	@echo "Очистка..."
