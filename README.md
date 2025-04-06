@@ -1,7 +1,7 @@
 <div align="center">
 <img src="https://github.com/user-attachments/assets/568d0943-f1b1-4daa-8aae-0f670cf9e4ea" alt="image" width="400" height="400" />
 <h1>РУССИФИКАТОР ENA: DREAM BBQ</h1>
-Репозиторий русификатора для ENA: Dream BBQ от BARBEQUE TEAM
+Репозиторий русcификатора для ENA: Dream BBQ от BARBEQUE TEAM
 </div>
 
 ## Содержание
@@ -52,7 +52,7 @@
 ```bash
 git clone https://github.com/bazelik-null/ENAbbq_rus
 ```
-**На linux:**
+**На Linux:**
   1. Установите [go](https://go.dev/).
   2. Установите fyne:
   ```bash
@@ -65,18 +65,18 @@ git clone https://github.com/bazelik-null/ENAbbq_rus
   ```
   5. Переместите исполняемые файлы в корень каталога репозитория.
 
-**На windows**
+**На Windows**
   1. Установите [go](https://go.dev/).
   2. Установите fyne
   ```bash
   go get fyne.io/fyne/v2@latest
   ```
   3. Перейдите в каталог ``./src/windows/``
-  3. Скомпилируйте под windows:
+  4. Скомпилируйте под windows:
   ```bash
   go build -ldflags="-s -w -H=windowsgui" -o Installer-Windows.exe *.go
   ```
-  4. Переместите исполняемые файлы в корень каталога репозитория.
+  5. Переместите исполняемые файлы в корень каталога репозитория.
 
       P.S. Для кросскомпиляции прочитайте гайд [здесь](https://docs.fyne.io/started/cross-compiling).
 
