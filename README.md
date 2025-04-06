@@ -1,2 +1,110 @@
-# ENAbbq_rus
-Русификатор для ENA: Dream BBQ от BARBEQUE TEAM
+<div align="center">
+<img src="https://github.com/user-attachments/assets/568d0943-f1b1-4daa-8aae-0f670cf9e4ea" alt="image" width="400" height="400" />
+<h1>РУССИФИКАТОР ENA: DREAM BBQ</h1>
+Репозиторий русификатора для ENA: Dream BBQ от BARBEQUE TEAM
+</div>
+
+## Содержание
+- [Описание](#описание)
+- [Установка](#установка)
+- [Компиляция](#компиляция)
+- [Команда](#команда)
+- [Лицензия](#лицензия)
+- [Канал](#канал)
+
+![image](https://github.com/user-attachments/assets/4e7a5300-2045-4cfd-96b4-57cd4fb9a2ce)
+
+## Описание
+Руссификатор для игры ENA: Dream BBQ переведённый полностью вручную. Включает в себя перевод (почти) всех диалогов, интерфейса и главного меню.
+
+В данном руссификаторе вы не встретите русской озвучки, которая бы убивала суть персонажей - разнообразие иностранных языков. Наш проект был нацелен на русскую локализацию и адаптацию шуток, стараясь максимально передать смысл тех или иных игр слов, каламбуров и выражений. 
+
+Мы используем самописный установщик основанный на фреймворке [fyne](https://fyne.io/) для расширяемости, красивого дизайна, прозрачности и удобства нашего проекта.
+
+>[!CAUTION]
+>
+>Руссификатор находится в бета версии. Если вы заметили неточности, баги или иные проблемы создайте баг-репорт в [Issues](https://github.com/bazelik-null/ENAbbq_rus/issues).
+
+Приятной игры!
+
+## Установка
+### Автоматически (рекомендуется)
+1. Скачайте установщик с вкладки [Releases](https://github.com/bazelik-null/ENAbbq_rus/releases/)
+2. Запустите исполняемый файл установщика.
+3. Установите русификатор и запустите игру.
+
+#### Вручную
+1. Скачайте (почти) все файлы из Resources.
+2. Переместите **resources.assets font_res.resS font_modern.resS** и **level2** в каталог ```/ENA Dream BBQ/ENA-4-DreamBBQ_Data/```
+3. Переместите **JoelG.ENA4.dll** в каталог ```/ENA Dream BBQ/ENA-4-DreamBBQ_Data/Managed/```
+4. Переместите **catalog.json** в каталог ```/ENA Dream BBQ/ENA-4-DreamBBQ_Data/StreamingAssets/aa/```
+5. Переместите **yarndialogue_assets_all_*.bundle** в каталог ```/ENA Dream BBQ/ENA-4-DreamBBQ_Data/StreamingAssets/aa/StandaloneWindows64/```
+
+## Компиляция
+Если вы решили скомпилировать установщик самостоятельно то следуйте этим шагам:
+1. Клонируйте репозиторий:
+```bash
+git clone https://github.com/bazelik-null/ENAbbq_rus
+```
+**На linux:**
+  1. Установите [go](https://go.dev/).
+  2. Установите fyne:
+  ```bash
+  go get fyne.io/fyne/v2@latest
+  ```
+  3. Перейдите в каталог ``./src/``
+  4. Скомпилируйте:
+  ```bash
+  make linux ; make windows
+  ```
+  5. Переместите исполняемые файлы в корень каталога репозитория.
+
+**На windows**
+  1. Установите [go](https://go.dev/).
+  2. Установите fyne
+  ```bash
+  go get fyne.io/fyne/v2@latest
+  ```
+  3. Перейдите в каталог ``./src/windows/``
+  3. Скомпилируйте под windows:
+  ```bash
+  go build -ldflags="-s -w -H=windowsgui" -o Installer-Windows.exe *.go
+  ```
+  P.S. Для кросскомпиляции прочитайте гайд [здесь](https://docs.fyne.io/started/cross-compiling).
+
+## Команда
+**Наша команда:**
+
+@fiverebbles - Техническая часть русификатора, координирование команды.
+
+@anpatu -  Редакция, помощь в принятии решений.
+
+@felesneveve - Перевод, редакция, ведение ТГ канала.
+
+@big_fan_of_kiwi - Перевод.
+
+@bagaxdd - Перевод.
+
+@hugginggg - Перевод.
+
+@PhONaRr - Перевод.
+
+@DetectivePrince - Перевод.
+
+@nucl3arsnake - Перевод, перевод всего интерфейса.
+
+@dorime_lolk4075 - Перевод.
+
+@kaimanDoppel - Перевод.
+
+@SalvetEna - Перевод.
+
+@freeze2222 - Шрифт.
+
+## Лицензия
+Данный проект лицензирован под открытой лицензией [MIT](https://mit-license.org/). Вы можете свободно использовать, изменять и распространять этот русификатор в соответствии с условиями лицензии.
+
+## Канал:
+<div align="center">
+<img src="https://github.com/user-attachments/assets/d5718154-17b2-49a8-98be-c71cc5d5cacd" alt="image" width="335" height="470" />
+</div>
