@@ -29,16 +29,22 @@
 
 ## Установка
 ### Автоматически (рекомендуется)
-1. Скачайте установщик с вкладки [Releases](https://github.com/bazelik-null/ENAbbq_rus/releases/)
+1. Скачайте установщик с вкладки [Releases](https://github.com/bazelik-null/ENAbbq_rus/releases/).
 2. Запустите исполняемый файл установщика.
 3. Установите русификатор и запустите игру.
 
-#### Вручную
+### Вручную
 1. Скачайте (почти) все файлы из Resources.
 2. Переместите **resources.assets font_res.resS font_modern.resS** и **level2** в каталог ```/ENA Dream BBQ/ENA-4-DreamBBQ_Data/```
 3. Переместите **JoelG.ENA4.dll** в каталог ```/ENA Dream BBQ/ENA-4-DreamBBQ_Data/Managed/```
 4. Переместите **catalog.json** в каталог ```/ENA Dream BBQ/ENA-4-DreamBBQ_Data/StreamingAssets/aa/```
 5. Переместите **yarndialogue_assets_all_*.bundle** в каталог ```/ENA Dream BBQ/ENA-4-DreamBBQ_Data/StreamingAssets/aa/StandaloneWindows64/```
+
+### Хардпак
+**Что такое хардпак?** Хардпак - это запакованный билд всей игры. Он нужен в случае если миграция изменений на новое обновление игры затянулась. *Хардпаки не рекомендуется стваить просто так. Лучше всего их использовать только в случаях когда обновление русификатора затянулось*
+1. Скачайте файл с названием ``Hardpack`` с вкладки [Releases](https://github.com/bazelik-null/ENAbbq_rus/releases/).
+2. В Steam нажмите на значок шестеренки во вкладке с ENA: Dream BBQ, перейдите в "Управление" и нажмите на "Просмотреть локальные файлы"
+3. Распакуйте содержимое архива в папку с игрой.
 
 ## Компиляция
 Если вы решили скомпилировать установщик самостоятельно то следуйте этим шагам:
