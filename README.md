@@ -76,7 +76,9 @@ git clone https://github.com/bazelik-null/ENAbbq_rus
   ```bash
   go build -ldflags="-s -w -H=windowsgui" -o Installer-Windows.exe *.go
   ```
-  P.S. Для кросскомпиляции прочитайте гайд [здесь](https://docs.fyne.io/started/cross-compiling).
+  4. Переместите исполняемые файлы в корень каталога репозитория.
+
+      P.S. Для кросскомпиляции прочитайте гайд [здесь](https://docs.fyne.io/started/cross-compiling).
 
 ## Команда
 **Наша команда:**
