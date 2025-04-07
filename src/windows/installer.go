@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"os"
 	"path/filepath"
@@ -9,6 +10,7 @@ import (
 func inject(path string) {
 	scriptDir, _ := os.Getwd()
 	yarnMetaPath := filepath.Join(scriptDir, "resources", "yarnmeta")
+	level := ""
 
 	file, _ := os.Open(yarnMetaPath)
 	defer file.Close()
@@ -30,14 +32,11 @@ func inject(path string) {
 	src4 := filepath.Join(scriptDir, "resources", "catalog.json")
 	dst4 := filepath.Join(path, "ENA-4-DreamBBQ_Data", "StreamingAssets", "aa", "catalog.json")
 
-	src5 := filepath.Join(scriptDir, "resources", "level2")
-	dst5 := filepath.Join(path, "ENA-4-DreamBBQ_Data", "level2")
+	src5 := filepath.Join(scriptDir, "resources", "font_modern.resS")
+	dst5 := filepath.Join(path, "ENA-4-DreamBBQ_Data", "font_modern.resS")
 
-	src6 := filepath.Join(scriptDir, "resources", "font_modern.resS")
-	dst6 := filepath.Join(path, "ENA-4-DreamBBQ_Data", "font_modern.resS")
-
-	src7 := filepath.Join(scriptDir, "resources", "YarnSpinner.Unity.dll")
-	dst7 := filepath.Join(path, "ENA-4-DreamBBQ_Data", "Managed", "YarnSpinner.Unity.dll")
+	src6 := filepath.Join(scriptDir, "resources", "YarnSpinner.Unity.dll")
+	dst6 := filepath.Join(path, "ENA-4-DreamBBQ_Data", "Managed", "YarnSpinner.Unity.dll")
 
 	copyFile(src, dst)
 	copyFile(src1, dst1)
@@ -46,7 +45,15 @@ func inject(path string) {
 	copyFile(src4, dst4)
 	copyFile(src5, dst5)
 	copyFile(src6, dst6)
-	copyFile(src7, dst7)
+
+	for i := 1; i <= 9; i++ {
+		level = "level" + fmt.Sprint(i)
+
+		srcLevel := filepath.Join(scriptDir, "resources", "levels", level)
+		dstLevel := filepath.Join(path, "ENA-4-DreamBBQ_Data", level)
+
+		copyFile(srcLevel, dstLevel)
+	}
 }
 
 func copyFile(src, dst string) error {
