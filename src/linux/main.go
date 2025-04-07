@@ -26,17 +26,24 @@ func main() {
 	teamLabel := canvas.NewText("  by BARBEQUE TEAM", color.RGBA{169, 169, 169, 255})
 	teamLabel.TextSize = 12
 
-	page1 := container.New(layout.NewVBoxLayout(),
-		mainLabel,
-		teamLabel,
-	)
+	errorLabel := canvas.NewText("", color.RGBA{255, 0, 0, 255})
 
 	btnContinue := widget.NewButton("Продолжить", func() {
 		w.SetContent(page2(w))
 	})
 
-	page1.Add(btnContinue)
+	page1 := container.New(layout.NewVBoxLayout(),
+		mainLabel,
+		teamLabel,
+		btnContinue,
+		errorLabel,
+	)
+
+	btnContinue.Disable()
+
 	page1 = container.New(layout.NewCenterLayout(), page1)
+
+	checkIntegrity(btnContinue, errorLabel)
 
 	w.SetContent(page1)
 	w.ShowAndRun()
@@ -50,7 +57,7 @@ func page2(w fyne.Window) *fyne.Container {
 	labelPath := widget.NewLabel("")
 	errorLabel := canvas.NewText("", color.RGBA{255, 0, 0, 255})
 
-	btnContinue := widget.NewButtonWithIcon("Установить", theme.ConfirmIcon(), func() {
+	btnContinue := widget.NewButtonWithIcon("Установить", theme.DownloadIcon(), func() {
 		w.SetContent(page3(w, path))
 	})
 	btnContinue.Disable()
@@ -86,6 +93,20 @@ func page2(w fyne.Window) *fyne.Container {
 	page2 = container.New(layout.NewCenterLayout(), page2)
 
 	return page2
+}
+
+func checkIntegrity(btnContinue *widget.Button, errorLabel *canvas.Text) {
+	appDir, _ := os.Getwd()
+	resourcesPath := filepath.Join(appDir, "resources", "yarnmeta")
+	if _, err := os.Stat(resourcesPath); os.IsNotExist(err) {
+		btnContinue.Disable()
+		errorLabel.Text = "[ERROR]: \"resources\" не найдено, пожалуйста распакуйте архив с установщиком."
+		errorLabel.Refresh()
+	} else {
+		btnContinue.Enable()
+		errorLabel.Text = ""
+		errorLabel.Refresh()
+	}
 }
 
 func checkExecutable(selectedPath string, btnContinue *widget.Button, errorLabel *canvas.Text) {
