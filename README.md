@@ -12,7 +12,7 @@
 - [Лицензия](#лицензия)
 - [Канал](#канал)
 
-![image](https://github.com/user-attachments/assets/4e7a5300-2045-4cfd-96b4-57cd4fb9a2ce)
+![image](https://github.com/user-attachments/assets/e813f62e-dd32-4456-b94b-6a0e6945719b)
 
 ## Описание
 Русификатор для игры ENA: Dream BBQ переведённый полностью вручную. Включает в себя перевод (почти) всех диалогов, интерфейса и главного меню.
