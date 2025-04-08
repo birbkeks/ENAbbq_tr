@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"image/color"
 	"os"
 	"path/filepath"
@@ -21,6 +22,25 @@ func main() {
 	w.Resize(fyne.NewSize(800, 600))
 	a.Settings().SetTheme(theme.DarkTheme())
 
+	mainLabel := widget.NewLabel("Пожалуйста подождите, идёт загрузка ресурсов установщика...")
+	init := container.New(layout.NewCenterLayout(), mainLabel)
+	w.SetContent(init)
+	w.Show()
+
+	installFunc := func() {
+		isSuccesful, err := install()
+		if isSuccesful {
+			w.SetContent(page0(w))
+		} else {
+			w.SetContent(pageERR(w, err))
+		}
+	}
+
+	go installFunc()
+	fyne.CurrentApp().Run()
+}
+
+func page0(w fyne.Window) *fyne.Container {
 	mainLabel := widget.NewLabel("Добро пожаловать в установщик русификатора для ENA: Dream BBQ")
 
 	teamLabel := canvas.NewText("  by BARBEQUE TEAM", color.RGBA{169, 169, 169, 255})
@@ -39,14 +59,24 @@ func main() {
 		errorLabel,
 	)
 
-	btnContinue.Disable()
-
 	page0 = container.New(layout.NewCenterLayout(), page0)
 
 	checkIntegrity(btnContinue, errorLabel)
 
-	w.SetContent(page0)
-	w.ShowAndRun()
+	return page0
+}
+
+func pageERR(w fyne.Window, err int) *fyne.Container {
+	pageERRContainer := container.New(layout.NewCenterLayout(),
+		container.New(layout.NewVBoxLayout(),
+			canvas.NewText("[FATL]: Произошла критическая ошибка при загрузке файлов.", color.RGBA{255, 0, 0, 255}),
+			canvas.NewText("[FATL]: Error "+fmt.Sprint(err), color.RGBA{255, 0, 0, 255}),
+			widget.NewButtonWithIcon("Закрыть", theme.WindowCloseIcon(), func() {
+				fyne.CurrentApp().Quit()
+			}),
+		),
+	)
+	return pageERRContainer
 }
 
 func pageInstall(w fyne.Window) *fyne.Container {
