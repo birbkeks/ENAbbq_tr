@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 )
 
-func installer(path string) {
+func inject(path string) {
 	appDir, _ := os.Getwd()
 	yarnMetaPath := filepath.Join(appDir, "resources", "yarnmeta")
 	level := ""
