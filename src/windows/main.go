@@ -165,7 +165,9 @@ func browseFile(w fyne.Window, onPathSelected func(string)) {
 }
 
 func pageEnd(path string) *fyne.Container {
+	appDir, _ := os.Getwd()
 	inject(path)
+	os.RemoveAll(filepath.Join(appDir, "resources"))
 	pageEndContainer := container.New(layout.NewCenterLayout(),
 		container.New(layout.NewVBoxLayout(),
 			widget.NewLabel("Спасибо за установку"),
