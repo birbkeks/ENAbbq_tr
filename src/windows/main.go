@@ -29,10 +29,10 @@ func main() {
 	errorLabel := canvas.NewText("", color.RGBA{255, 0, 0, 255})
 
 	btnContinue := widget.NewButton("Продолжить", func() {
-		w.SetContent(page2(w))
+		w.SetContent(pageInstall(w))
 	})
 
-	page1 := container.New(layout.NewVBoxLayout(),
+	page0 := container.New(layout.NewVBoxLayout(),
 		mainLabel,
 		teamLabel,
 		btnContinue,
@@ -41,15 +41,15 @@ func main() {
 
 	btnContinue.Disable()
 
-	page1 = container.New(layout.NewCenterLayout(), page1)
+	page0 = container.New(layout.NewCenterLayout(), page0)
 
 	checkIntegrity(btnContinue, errorLabel)
 
-	w.SetContent(page1)
+	w.SetContent(page0)
 	w.ShowAndRun()
 }
 
-func page2(w fyne.Window) *fyne.Container {
+func pageInstall(w fyne.Window) *fyne.Container {
 	var path string
 	appDir, _ := os.Getwd()
 	steamIcon, _ := fyne.LoadResourceFromPath(filepath.Join(appDir, "resources", "steamIcon.png"))
@@ -58,7 +58,7 @@ func page2(w fyne.Window) *fyne.Container {
 	errorLabel := canvas.NewText("", color.RGBA{255, 0, 0, 255})
 
 	btnContinue := widget.NewButtonWithIcon("Установить", theme.DownloadIcon(), func() {
-		w.SetContent(page3(w, path))
+		w.SetContent(pageEnd(path))
 	})
 	btnContinue.Disable()
 
@@ -82,7 +82,7 @@ func page2(w fyne.Window) *fyne.Container {
 	buttonsContainer.Add(btnSteam)
 	buttonsContainer.Add(btnBrowse)
 
-	page2 := container.New(layout.NewVBoxLayout(),
+	pageInstall := container.New(layout.NewVBoxLayout(),
 		widget.NewLabel("Выберите путь до игры. Если она установлена через Steam нажмите на кнопку Steam."),
 		buttonsContainer,
 		labelPath,
@@ -90,9 +90,9 @@ func page2(w fyne.Window) *fyne.Container {
 		btnContinue,
 	)
 
-	page2 = container.New(layout.NewCenterLayout(), page2)
+	pageInstall = container.New(layout.NewCenterLayout(), pageInstall)
 
-	return page2
+	return pageInstall
 }
 
 func checkIntegrity(btnContinue *widget.Button, errorLabel *canvas.Text) {
@@ -134,9 +134,9 @@ func browseFile(w fyne.Window, onPathSelected func(string)) {
 	}, w)
 }
 
-func page3(w fyne.Window, path string) *fyne.Container {
+func pageEnd(path string) *fyne.Container {
 	installer(path)
-	page3Container := container.New(layout.NewCenterLayout(),
+	pageEndContainer := container.New(layout.NewCenterLayout(),
 		container.New(layout.NewVBoxLayout(),
 			widget.NewLabel("Спасибо за установку"),
 			widget.NewButtonWithIcon("Закрыть", theme.WindowCloseIcon(), func() {
@@ -144,5 +144,5 @@ func page3(w fyne.Window, path string) *fyne.Container {
 			}),
 		),
 	)
-	return page3Container
+	return pageEndContainer
 }

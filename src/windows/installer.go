@@ -7,9 +7,9 @@ import (
 	"path/filepath"
 )
 
-func inject(path string) {
-	scriptDir, _ := os.Getwd()
-	yarnMetaPath := filepath.Join(scriptDir, "resources", "yarnmeta")
+func installer(path string) {
+	appDir, _ := os.Getwd()
+	yarnMetaPath := filepath.Join(appDir, "resources", "yarnmeta")
 	level := ""
 
 	file, _ := os.Open(yarnMetaPath)
@@ -17,25 +17,25 @@ func inject(path string) {
 
 	fileNameBytes, _ := io.ReadAll(file)
 	fileName := string(fileNameBytes)
-	src := filepath.Join(scriptDir, "resources", fileName)
+	src := filepath.Join(appDir, "resources", fileName)
 	dst := filepath.Join(path, "ENA-4-DreamBBQ_Data", "StreamingAssets", "aa", "StandaloneWindows64", fileName)
 
-	src1 := filepath.Join(scriptDir, "resources", "font_res.resS")
+	src1 := filepath.Join(appDir, "resources", "font_res.resS")
 	dst1 := filepath.Join(path, "ENA-4-DreamBBQ_Data", "font_res.resS")
 
-	src2 := filepath.Join(scriptDir, "resources", "resources.assets")
+	src2 := filepath.Join(appDir, "resources", "resources.assets")
 	dst2 := filepath.Join(path, "ENA-4-DreamBBQ_Data", "resources.assets")
 
-	src3 := filepath.Join(scriptDir, "resources", "JoelG.ENA4.dll")
+	src3 := filepath.Join(appDir, "resources", "JoelG.ENA4.dll")
 	dst3 := filepath.Join(path, "ENA-4-DreamBBQ_Data", "Managed", "JoelG.ENA4.dll")
 
-	src4 := filepath.Join(scriptDir, "resources", "catalog.json")
+	src4 := filepath.Join(appDir, "resources", "catalog.json")
 	dst4 := filepath.Join(path, "ENA-4-DreamBBQ_Data", "StreamingAssets", "aa", "catalog.json")
 
-	src5 := filepath.Join(scriptDir, "resources", "font_modern.resS")
+	src5 := filepath.Join(appDir, "resources", "font_modern.resS")
 	dst5 := filepath.Join(path, "ENA-4-DreamBBQ_Data", "font_modern.resS")
 
-	src6 := filepath.Join(scriptDir, "resources", "YarnSpinner.Unity.dll")
+	src6 := filepath.Join(appDir, "resources", "YarnSpinner.Unity.dll")
 	dst6 := filepath.Join(path, "ENA-4-DreamBBQ_Data", "Managed", "YarnSpinner.Unity.dll")
 
 	copyFile(src, dst)
@@ -49,7 +49,7 @@ func inject(path string) {
 	for i := 1; i <= 9; i++ {
 		level = "level" + fmt.Sprint(i)
 
-		srcLevel := filepath.Join(scriptDir, "resources", "levels", level)
+		srcLevel := filepath.Join(appDir, "resources", "levels", level)
 		dstLevel := filepath.Join(path, "ENA-4-DreamBBQ_Data", level)
 
 		copyFile(srcLevel, dstLevel)
@@ -66,8 +66,4 @@ func copyFile(src, dst string) error {
 	io.Copy(dstFile, srcFile)
 
 	return nil
-}
-
-func installer(path string) {
-	inject(path)
 }
