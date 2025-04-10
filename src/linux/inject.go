@@ -1,69 +1,70 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 	"os"
 	"path/filepath"
 )
 
-func inject(path string) {
+func inject(path string) error {
 	appDir, _ := os.Getwd()
-	yarnMetaPath := filepath.Join(appDir, "resources", "yarnmeta")
-	level := ""
+	metaPath := filepath.Join(appDir, "resources", "meta.json")
 
-	file, _ := os.Open(yarnMetaPath)
-	defer file.Close()
+	data, err := os.ReadFile(metaPath)
+	if err != nil {
+		return err
+	}
 
-	fileNameBytes, _ := io.ReadAll(file)
-	fileName := string(fileNameBytes)
-	src := filepath.Join(appDir, "resources", fileName)
-	dst := filepath.Join(path, "ENA-4-DreamBBQ_Data", "StreamingAssets", "aa", "StandaloneWindows64", fileName)
+	var meta struct {
+		Files []struct {
+			Src string `json:"src"`
+			Dst string `json:"dst"`
+		} `json:"files"`
+	}
+	json.Unmarshal(data, &meta)
 
-	src1 := filepath.Join(appDir, "resources", "font_res.resS")
-	dst1 := filepath.Join(path, "ENA-4-DreamBBQ_Data", "font_res.resS")
+	for _, file := range meta.Files {
+		src := filepath.Join(appDir, file.Src)
+		dst := filepath.Join(path, file.Dst)
 
-	src2 := filepath.Join(appDir, "resources", "resources.assets")
-	dst2 := filepath.Join(path, "ENA-4-DreamBBQ_Data", "resources.assets")
+		err := copyFile(src, dst)
+		if err != nil {
+			return err
+		}
+	}
 
-	src3 := filepath.Join(appDir, "resources", "JoelG.ENA4.dll")
-	dst3 := filepath.Join(path, "ENA-4-DreamBBQ_Data", "Managed", "JoelG.ENA4.dll")
-
-	src4 := filepath.Join(appDir, "resources", "catalog.json")
-	dst4 := filepath.Join(path, "ENA-4-DreamBBQ_Data", "StreamingAssets", "aa", "catalog.json")
-
-	src5 := filepath.Join(appDir, "resources", "font_modern.resS")
-	dst5 := filepath.Join(path, "ENA-4-DreamBBQ_Data", "font_modern.resS")
-
-	src6 := filepath.Join(appDir, "resources", "YarnSpinner.Unity.dll")
-	dst6 := filepath.Join(path, "ENA-4-DreamBBQ_Data", "Managed", "YarnSpinner.Unity.dll")
-
-	copyFile(src, dst)
-	copyFile(src1, dst1)
-	copyFile(src2, dst2)
-	copyFile(src3, dst3)
-	copyFile(src4, dst4)
-	copyFile(src5, dst5)
-	copyFile(src6, dst6)
-
-	for i := 1; i <= 9; i++ {
-		level = "level" + fmt.Sprint(i)
-
+	for i := 0; i <= 9; i++ {
+		level := "level" + fmt.Sprint(i)
 		srcLevel := filepath.Join(appDir, "resources", "levels", level)
 		dstLevel := filepath.Join(path, "ENA-4-DreamBBQ_Data", level)
 
-		copyFile(srcLevel, dstLevel)
+		err := copyFile(srcLevel, dstLevel)
+		if err != nil {
+			return err
+		}
 	}
+	return nil
 }
 
 func copyFile(src, dst string) error {
-	srcFile, _ := os.Open(src)
+	srcFile, err := os.Open(src)
+	if err != nil {
+		return err
+	}
 	defer srcFile.Close()
 
-	dstFile, _ := os.Create(dst)
+	dstFile, err := os.Create(dst)
+	if err != nil {
+		return err
+	}
 	defer dstFile.Close()
 
-	io.Copy(dstFile, srcFile)
+	_, err = io.Copy(dstFile, srcFile)
+	if err != nil {
+		return err
+	}
 
 	return nil
 }

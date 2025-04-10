@@ -44,45 +44,45 @@ func getURL() (string, int) {
 	return "", http.StatusNotFound
 }
 
-func downloadFile(url, filename string) (bool, int) {
+func downloadFile(url, filename string) int {
 	resp, err := http.Get(url)
 	if err != nil {
-		return false, http.StatusInternalServerError
+		return http.StatusInternalServerError
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return false, resp.StatusCode
+		return resp.StatusCode
 	}
 
 	f, err := os.Create(filename)
 	if err != nil {
-		return false, http.StatusInternalServerError
+		return http.StatusInternalServerError
 	}
 	defer f.Close()
 
 	_, err = io.Copy(f, resp.Body)
 	if err != nil {
-		return false, http.StatusInternalServerError
+		return http.StatusInternalServerError
 	}
 
-	return true, http.StatusOK
+	return 0
 }
 
-func install() (bool, int) {
+func install() int {
 	url, code := getURL()
 	if code != http.StatusOK {
-		return false, code
+		return code
 	}
 
 	if _, err := http.Head(url); err != nil {
-		return false, http.StatusBadGateway
+		return http.StatusBadGateway
 	}
 
 	filename := "resources.zip"
-	downloaded, code := downloadFile(url, filename)
-	if !downloaded {
-		return false, code
+	code = downloadFile(url, filename)
+	if code != 0 {
+		return code
 	}
 
 	r, _ := zip.OpenReader(filename)
@@ -104,5 +104,5 @@ func install() (bool, int) {
 	}
 
 	_ = os.Remove(filename)
-	return true, http.StatusOK
+	return 0
 }

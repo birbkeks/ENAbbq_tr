@@ -28,11 +28,11 @@ func main() {
 	w.Show()
 
 	installFunc := func() {
-		isSuccesful, err := install()
-		if isSuccesful {
-			w.SetContent(page0(w))
-		} else {
+		err := install()
+		if err != 0 {
 			w.SetContent(pageERR(w, err))
+		} else {
+			w.SetContent(page0(w))
 		}
 	}
 
@@ -113,7 +113,7 @@ func pageInstall(w fyne.Window) *fyne.Container {
 	buttonsContainer.Add(btnBrowse)
 
 	pageInstall := container.New(layout.NewVBoxLayout(),
-		widget.NewLabel("Выберите путь до игры. Если она установлена через Steam нажмите на кнопку Steam."),
+		widget.NewLabel("Выберите путь до игры. Если она установлена по стандартному пути нажмите на кнопку Steam."),
 		buttonsContainer,
 		labelPath,
 		errorLabel,
@@ -127,10 +127,10 @@ func pageInstall(w fyne.Window) *fyne.Container {
 
 func checkIntegrity(btnContinue *widget.Button, errorLabel *canvas.Text) {
 	appDir, _ := os.Getwd()
-	resourcesPath := filepath.Join(appDir, "resources", "yarnmeta")
+	resourcesPath := filepath.Join(appDir, "resources", "meta.json")
 	if _, err := os.Stat(resourcesPath); os.IsNotExist(err) {
 		btnContinue.Disable()
-		errorLabel.Text = "[ERROR]: \"resources\" не найдено, пожалуйста распакуйте архив с установщиком."
+		errorLabel.Text = "[FATL]: \"resources\" не найдено."
 		errorLabel.Refresh()
 	} else {
 		btnContinue.Enable()
@@ -166,15 +166,28 @@ func browseFile(w fyne.Window, onPathSelected func(string)) {
 
 func pageEnd(path string) *fyne.Container {
 	appDir, _ := os.Getwd()
-	inject(path)
+	err := inject(path)
 	os.RemoveAll(filepath.Join(appDir, "resources"))
-	pageEndContainer := container.New(layout.NewCenterLayout(),
-		container.New(layout.NewVBoxLayout(),
-			widget.NewLabel("Спасибо за установку"),
-			widget.NewButtonWithIcon("Закрыть", theme.WindowCloseIcon(), func() {
-				fyne.CurrentApp().Quit()
-			}),
-		),
-	)
-	return pageEndContainer
+	if err != nil {
+		pageEndContainer := container.New(layout.NewCenterLayout(),
+			container.New(layout.NewVBoxLayout(),
+				canvas.NewText("[FATL]: Произошла критическая ошибка при инъекции ассетов.", color.RGBA{255, 0, 0, 255}),
+				canvas.NewText("[FATL]: Error "+fmt.Sprint(err), color.RGBA{255, 0, 0, 255}),
+				widget.NewButtonWithIcon("Закрыть", theme.WindowCloseIcon(), func() {
+					fyne.CurrentApp().Quit()
+				}),
+			),
+		)
+		return pageEndContainer
+	} else {
+		pageEndContainer := container.New(layout.NewCenterLayout(),
+			container.New(layout.NewVBoxLayout(),
+				widget.NewLabel("Спасибо за установку"),
+				widget.NewButtonWithIcon("Закрыть", theme.WindowCloseIcon(), func() {
+					fyne.CurrentApp().Quit()
+				}),
+			),
+		)
+		return pageEndContainer
+	}
 }
