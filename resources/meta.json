@@ -13,6 +13,14 @@
             "dst": "ENA-4-DreamBBQ_Data/resources.assets"
         },
         {
+            "src": "resources/sharedassets1.assets",
+            "dst": "ENA-4-DreamBBQ_Data/sharedassets1.assets"
+        },
+        {
+            "src": "resources/sharedassets7.assets",
+            "dst": "ENA-4-DreamBBQ_Data/sharedassets7.assets"
+        },
+        {
             "src": "resources/JoelG.ENA4.dll",
             "dst": "ENA-4-DreamBBQ_Data/Managed/JoelG.ENA4.dll"
         },
