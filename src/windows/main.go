@@ -22,7 +22,7 @@ func main() {
 	w.Resize(fyne.NewSize(800, 600))
 	a.Settings().SetTheme(theme.DarkTheme())
 
-	mainLabel := widget.NewLabel("Please wait while resources are being installed...")
+	mainLabel := widget.NewLabel("Please wait while the resources are being installed...")
 	init := container.New(layout.NewCenterLayout(), mainLabel)
 	w.SetContent(init)
 	w.Show()
@@ -101,7 +101,7 @@ func pageInstall(w fyne.Window) *fyne.Container {
 		labelPath.SetText("Selected path: " + path)
 	})
 
-	btnBrowse := widget.NewButtonWithIcon("Открыть", theme.SearchIcon(), func() {
+	btnBrowse := widget.NewButtonWithIcon("Open", theme.SearchIcon(), func() {
 		browseFile(w, func(selectedPath string) {
 			path = selectedPath
 			checkExecutable(path, btnContinue, errorLabel)
@@ -171,7 +171,7 @@ func pageEnd(path string) *fyne.Container {
 	if err != nil {
 		pageEndContainer := container.New(layout.NewCenterLayout(),
 			container.New(layout.NewVBoxLayout(),
-				canvas.NewText("[FATL]: Произошла критическая ошибка при инъекции ассетов.", color.RGBA{255, 0, 0, 255}),
+				canvas.NewText("[FATL]: A critical error occurred while injecting assets.", color.RGBA{255, 0, 0, 255}),
 				canvas.NewText("[FATL]: Error "+fmt.Sprint(err), color.RGBA{255, 0, 0, 255}),
 				widget.NewButtonWithIcon("Close", theme.WindowCloseIcon(), func() {
 					fyne.CurrentApp().Quit()
