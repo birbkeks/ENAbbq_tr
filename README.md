@@ -64,7 +64,7 @@ git clone https://github.com/birbkeks/ENAbbq_en
   ```bash
   go get fyne.io/fyne/v2@latest
   ```
-  3. Go to the directoy ``./src/``
+  3. Go to the ``./src/`` directoy
   4. Compile:
   ```bash
   make linux ; make windows
@@ -77,7 +77,7 @@ git clone https://github.com/birbkeks/ENAbbq_en
   ```bash
   go get fyne.io/fyne/v2@latest
   ```
-  3. Go to the directory ``./src/windows/``
+  3. Go to the ``./src/windows/`` directory
   4. Compile for windows:
   ```bash
   go build -ldflags="-s -w -H=windowsgui" -o Installer-Windows.exe *.go
