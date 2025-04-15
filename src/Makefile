@@ -7,20 +7,20 @@ THEME=dark
 all: help
 
 windows:
-	@echo "Building a project for Windows..."
+	@echo "Windows için proje oluşturuluyor..."
 	@CGO_ENABLED=$(CGO_ENABLED) CC=$(CC) GOOS=windows GOARCH=amd64 go build -ldflags="-s -w -H=windowsgui" -o $(OUTPUT_WINDOWS) ./windows/*.go
 
 linux:
-	@echo "Building a project for  Linux..."
+	@echo "Linux için proje oluşturuluyor..."
 	@GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o $(OUTPUT_LINUX) ./linux/*.go
 
 clean:
-	@echo "Cleaning..."
+	@echo "Temizleniyor..."
 	@rm -f $(OUTPUT_WINDOWS) $(OUTPUT_LINUX)
 
 help:
-	@echo "Use 'make windows' to build the Windows version."
-	@echo "Use 'make linux' to build the Linux version."
-	@echo "Use 'make clean' to clean."
+	@echo "Windows versiyonunu kurmak için 'make windows' komutunu kullanın."
+	@echo "Linux versiyonunu kurmak için 'make linux' komutunu kullanın."
+	@echo "Temizlemek için 'make clean' komutunu kullanın."
 
 .PHONY: all windows linux clean help

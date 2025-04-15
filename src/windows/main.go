@@ -18,11 +18,11 @@ import (
 
 func main() {
 	a := app.New()
-	w := a.NewWindow("Translator for ENA: Dream BBQ")
+	w := a.NewWindow("Türkçeleştirilmiş ENA: Dream BBQ")
 	w.Resize(fyne.NewSize(800, 600))
 	a.Settings().SetTheme(theme.DarkTheme())
 
-	mainLabel := widget.NewLabel("Please wait while the resources are being installed...")
+	mainLabel := widget.NewLabel("Lütfen kaynaklar yüklenirken bekleyin...")
 	init := container.New(layout.NewCenterLayout(), mainLabel)
 	w.SetContent(init)
 	w.Show()
@@ -41,14 +41,14 @@ func main() {
 }
 
 func page0(w fyne.Window) *fyne.Container {
-	mainLabel := widget.NewLabel("Welcome to translater for ENA: Dream BBQ")
+	mainLabel := widget.NewLabel("Türkçeleştirilmiş ENA: Dream BBQ'ya hoşgeldiniz")
 
-	teamLabel := canvas.NewText("  by BARBEQUE TEAM", color.RGBA{169, 169, 169, 255})
+	teamLabel := canvas.NewText("  BARBEQUE TEAM katkılarıyla", color.RGBA{169, 169, 169, 255})
 	teamLabel.TextSize = 12
 
 	errorLabel := canvas.NewText("", color.RGBA{255, 0, 0, 255})
 
-	btnContinue := widget.NewButton("Continue", func() {
+	btnContinue := widget.NewButton("İlerle", func() {
 		w.SetContent(pageInstall(w))
 	})
 
@@ -69,9 +69,9 @@ func page0(w fyne.Window) *fyne.Container {
 func pageERR(w fyne.Window, err int) *fyne.Container {
 	pageERRContainer := container.New(layout.NewCenterLayout(),
 		container.New(layout.NewVBoxLayout(),
-			canvas.NewText("[FATL]: A critical error occurred while loading files.", color.RGBA{255, 0, 0, 255}),
-			canvas.NewText("[FATL]: Error "+fmt.Sprint(err), color.RGBA{255, 0, 0, 255}),
-			widget.NewButtonWithIcon("Close", theme.WindowCloseIcon(), func() {
+			canvas.NewText("[FATL]: Dosyalar yüklenirken kritik hata meydana geldi", color.RGBA{255, 0, 0, 255}),
+			canvas.NewText("[FATL]: Hata "+fmt.Sprint(err), color.RGBA{255, 0, 0, 255}),
+			widget.NewButtonWithIcon("Kapat", theme.WindowCloseIcon(), func() {
 				fyne.CurrentApp().Quit()
 			}),
 		),
@@ -87,7 +87,7 @@ func pageInstall(w fyne.Window) *fyne.Container {
 	labelPath := widget.NewLabel("")
 	errorLabel := canvas.NewText("", color.RGBA{255, 0, 0, 255})
 
-	btnContinue := widget.NewButtonWithIcon("Install", theme.DownloadIcon(), func() {
+	btnContinue := widget.NewButtonWithIcon("Kur", theme.DownloadIcon(), func() {
 		w.SetContent(pageEnd(path))
 	})
 	btnContinue.Disable()
@@ -98,14 +98,14 @@ func pageInstall(w fyne.Window) *fyne.Container {
 		selectedPath := filepath.Join("C:\\", "Program Files (x86)", "Steam", "steamapps", "common", "ENA Dream BBQ")
 		path = selectedPath
 		checkExecutable(path, btnContinue, errorLabel)
-		labelPath.SetText("Selected path: " + path)
+		labelPath.SetText("Seçilen dizin: " + path)
 	})
 
-	btnBrowse := widget.NewButtonWithIcon("Open", theme.SearchIcon(), func() {
+	btnBrowse := widget.NewButtonWithIcon("Aç", theme.SearchIcon(), func() {
 		browseFile(w, func(selectedPath string) {
 			path = selectedPath
 			checkExecutable(path, btnContinue, errorLabel)
-			labelPath.SetText("Selected path: " + path)
+			labelPath.SetText("Seçilen dizin: " + path)
 		})
 	})
 
@@ -113,7 +113,7 @@ func pageInstall(w fyne.Window) *fyne.Container {
 	buttonsContainer.Add(btnBrowse)
 
 	pageInstall := container.New(layout.NewVBoxLayout(),
-		widget.NewLabel("Select the path to the game. If it is installed in the standard path, click the Steam button."),
+		widget.NewLabel("Oyunun olduğu dizini seçin. Eğer standart dizinde kurulu ise Steam tuşuna basın."),
 		buttonsContainer,
 		labelPath,
 		errorLabel,
@@ -130,7 +130,7 @@ func checkIntegrity(btnContinue *widget.Button, errorLabel *canvas.Text) {
 	resourcesPath := filepath.Join(appDir, "resources", "meta.json")
 	if _, err := os.Stat(resourcesPath); os.IsNotExist(err) {
 		btnContinue.Disable()
-		errorLabel.Text = "[FATL]: \"resources\" not found."
+		errorLabel.Text = "[FATL]: \"resources\" bulunamadı."
 		errorLabel.Refresh()
 	} else {
 		btnContinue.Enable()
@@ -143,7 +143,7 @@ func checkExecutable(selectedPath string, btnContinue *widget.Button, errorLabel
 	executablePath := filepath.Join(selectedPath, "ENA-4-DreamBBQ.exe")
 	if _, err := os.Stat(executablePath); os.IsNotExist(err) {
 		btnContinue.Disable()
-		errorLabel.Text = "[ERROR]: \"ENA-4-DreamBBQ.exe\" not found, select the folder with the game executable file"
+		errorLabel.Text = "[ERROR]: \"ENA-4-DreamBBQ.exe\" bulunamadı, oyun çalıştırıcısının olduğu dizini seçin"
 		errorLabel.Refresh()
 	} else {
 		btnContinue.Enable()
@@ -171,9 +171,9 @@ func pageEnd(path string) *fyne.Container {
 	if err != nil {
 		pageEndContainer := container.New(layout.NewCenterLayout(),
 			container.New(layout.NewVBoxLayout(),
-				canvas.NewText("[FATL]: A critical error occurred while injecting assets.", color.RGBA{255, 0, 0, 255}),
-				canvas.NewText("[FATL]: Error "+fmt.Sprint(err), color.RGBA{255, 0, 0, 255}),
-				widget.NewButtonWithIcon("Close", theme.WindowCloseIcon(), func() {
+				canvas.NewText("[FATL]: Dosyalar yerleştirilirken kritik hata meydana geldi.", color.RGBA{255, 0, 0, 255}),
+				canvas.NewText("[FATL]: Hata"+fmt.Sprint(err), color.RGBA{255, 0, 0, 255}),
+				widget.NewButtonWithIcon("Kapat", theme.WindowCloseIcon(), func() {
 					fyne.CurrentApp().Quit()
 				}),
 			),
@@ -182,8 +182,8 @@ func pageEnd(path string) *fyne.Container {
 	} else {
 		pageEndContainer := container.New(layout.NewCenterLayout(),
 			container.New(layout.NewVBoxLayout(),
-				widget.NewLabel("Thank you for installing"),
-				widget.NewButtonWithIcon("Close", theme.WindowCloseIcon(), func() {
+				widget.NewLabel("Kurulum tamamlandı"),
+				widget.NewButtonWithIcon("Kapat", theme.WindowCloseIcon(), func() {
 					fyne.CurrentApp().Quit()
 				}),
 			),
