@@ -48,7 +48,7 @@ func page0(w fyne.Window) *fyne.Container {
 
 	errorLabel := canvas.NewText("", color.RGBA{255, 0, 0, 255})
 
-	btnContinue := widget.NewButton("Продолжить", func() {
+	btnContinue := widget.NewButton("Continue", func() {
 		w.SetContent(pageInstall(w))
 	})
 
