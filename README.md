@@ -7,7 +7,7 @@ Türkçeleştirilmiş ENA: Dream BBQ deposu
 - [Açıklama](#Açıklama)
 - [Kurulum](#Kurulum)
 - [Derleme](#Derleme)
-- [Takım](#Takım)
+- [Ekip](#Ekip)
 - [Lisans](#Lisans)
 - [Kanal](#Kanal)
 
