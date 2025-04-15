@@ -41,7 +41,7 @@ func main() {
 }
 
 func page0(w fyne.Window) *fyne.Container {
-	mainLabel := widget.NewLabel("WElcome to translater for ENA: Dream BBQ")
+	mainLabel := widget.NewLabel("Welcome to translater for ENA: Dream BBQ")
 
 	teamLabel := canvas.NewText("  by BARBEQUE TEAM", color.RGBA{169, 169, 169, 255})
 	teamLabel.TextSize = 12
