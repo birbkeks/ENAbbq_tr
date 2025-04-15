@@ -7,7 +7,9 @@ Translator repository for ENA: Dream BBQ from BARBEQUE TEAM
 >
 >THIS IS A ENGLISH TRANSLATION OF THE [ENAbbq_ru](https://github.com/bazelik-null/ENAbbq_rus) REPO <br>
 >I DID NOT MADE ANY OF THIS, I ONLY TRANSLATED THE REPO TO ENGLISH SO OTHERS COULD UNDERSTAND IT BETTER. <br>
->IF YOU HAVE ANY PROBLEMS WITH THE TRANSLATOR, GO TO THE ORIGINAL REPO AND REPORT IT THERE.
+>IF YOU HAVE ANY PROBLEMS WITH THE TRANSLATOR, GO TO THE ORIGINAL REPO AND REPORT IT THERE. <br>
+>
+>I DO NOT KNOW ANY RUSSIAN, I USED GOOGLE TRANSLATE FOR ALL THE RUSSIAN TEXTS.
 
 ## Contents
 - [Description](#Description)
@@ -27,13 +29,13 @@ We use a custom installer based on the [fyne](https://fyne.io/) framework for ex
 
 >[!CAUTION]
 >
->The Translator is in beta version. If you notice mistakes, bugs or other problems, create a bug report in [Issues](https://github.com/bazelik-null/ENAbbq_rus/issues).
+>The Translator is in beta version. If you notice mistakes, bugs or other problems, create a bug report in [Issues](https://github.com/birbkeks/ENAbbq_en/issues).
 
 Enjoy!
 
 ## Installation
 ### Automatically (Recommended)
-1. Download the installer from [Releases](https://github.com/bazelik-null/ENAbbq_en/releases/).
+1. Download the installer from [Releases](https://github.com/birbkeks/ENAbbq_en/releases/).
 2. Run the installer and install the Translator.
    **P.S. On Linux, you need to go to "Compatibility" in the game properties and select Proton!**
 
@@ -46,7 +48,7 @@ Enjoy!
 
 ### Hardpack
 **What is a hardpack?** A hardpack is a packed build of the entire game. It is needed if the migration of changes to a new game update is delayed. *It is not recommended to install hardpacks just like that. It is best to use them only in cases where the update of the Translator is delayed*
-1. Go to the [Releases](https://github.com/bazelik-null/ENAbbq_rus/releases/), follow the link to the TG channel with hardpacks and download the latest archive.
+1. Go to the [Releases](https://github.com/birbkeks/ENAbbq_en/releases/), follow the link to the TG channel with hardpacks and download the latest archive.
 2. In Steam, click on the gear icon in the ENA: Dream BBQ tab, go to "Manage" and click on "Browse Local Files"
 3. Unzip the contents of the archive into the game folder.
 
@@ -54,7 +56,7 @@ Enjoy!
 If you decide to compile the installer yourself, follow these steps:
 1. Clone the repository:
 ```bash
-git clone https://github.com/bazelik-null/ENAbbq_rus
+git clone https://github.com/birbkeks/ENAbbq_en
 ```
 **On Linux:**
   1. Install [go](https://go.dev/) and mingw-w64-gcc for cross-compilation.
