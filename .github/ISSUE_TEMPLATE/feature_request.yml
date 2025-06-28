@@ -1,0 +1,11 @@
+name: "Add Request"
+description: "If you have a good idea."
+labels: ["triage"]
+body:
+  - type: textarea
+    id: description
+    validations:
+        required: true
+    attributes:
+        label: "Description"
+        description: "Please describe your request in as much detail as possible"
