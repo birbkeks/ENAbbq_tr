@@ -69,7 +69,7 @@ git clone https://github.com/birbkeks/ENAbbq_tr
   ```
   5. Çalıştırıcı dosyaları deponun ana dizinine taşıyın.
 
-    Not: Çapraz derleme için [bu](https://docs.fyne.io/started/cross-compiling) rehbere göz atın.
+      Not: Çapraz derleme için [bu](https://docs.fyne.io/started/cross-compiling) rehbere göz atın.
 
 ## Ekip
 **Ekibimiz:**
