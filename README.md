@@ -20,13 +20,13 @@ Kendi özel kurulum sihirbazımız güzel tasarımı, şeffaflığı ve projemiz
 
 >[!CAUTION]
 >
->Türkçeleştirme beta aşamasındadır. Eğer bir hata, veya başka bir sorun ile karşılaşırsanız [Issues](https://github.com/birbkeks/ENAbbq_tr/issues) kısmından bize bildirebilirsiniz.
+>Türkçeleştirme beta aşamasındadır. Eğer bir hata, veya başka bir sorun ile karşılaşırsanız [Issues](https://github.com/syrupderg/ENAbbq_tr/issues) kısmından bize bildirebilirsiniz.
 
 İyi eğlenceler!
 
 ## Kurulum
 ### Otomatik (Tavsiye edilir)
-1. Kurulum sihirbazını [Releases](https://github.com/birbkeks/ENAbbq_tr/releases/)'den indirin.
+1. Kurulum sihirbazını [Releases](https://github.com/syrupderg/ENAbbq_tr/releases/)'den indirin.
 2. Kurulum sihirbazını çalıştırın ve Türkçe yamayı kurun.
   **Not: Linux için Steam ayarlarından oyunun "Uyumluluk" seçeneğini açıp bir Proton versiyonu seçmeniz gerekmektedir**
 
